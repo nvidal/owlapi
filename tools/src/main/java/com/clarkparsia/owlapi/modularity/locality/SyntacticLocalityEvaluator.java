@@ -84,6 +84,7 @@ import org.semanticweb.owlapi.model.OWLImportsDeclaration;
 import org.semanticweb.owlapi.model.OWLInverseFunctionalObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLInverseObjectPropertiesAxiom;
 import org.semanticweb.owlapi.model.OWLIrreflexiveObjectPropertyAxiom;
+import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.model.OWLNegativeDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLNegativeObjectPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLObjectAllValuesFrom;
@@ -858,6 +859,13 @@ public class SyntacticLocalityEvaluator implements LocalityEvaluator {
         public void visit(OWLSubAnnotationPropertyOfAxiom axiom) {
             isLocal=true;
         }
+
+
+		@Override
+		public void visit(OWLMetamodellingAxiom axiom) {
+			//TODO
+			
+		}
     }
 
 

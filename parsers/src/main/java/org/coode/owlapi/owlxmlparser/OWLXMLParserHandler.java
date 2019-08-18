@@ -441,6 +441,13 @@ public class OWLXMLParserHandler extends DefaultHandler {
 
         // Axioms
 
+        addFactory(new AbstractElementHandlerFactory(METAMODELLING) {
+            @Override
+            public OWLElementHandler<?> createHandler(OWLXMLParserHandler handler) {
+                return new OWLMetamodellingAxiomElementHandler(handler);
+            }
+        });
+        
         addFactory(new AbstractElementHandlerFactory(SUB_CLASS_OF) {
             @Override
             public OWLElementHandler<?> createHandler(OWLXMLParserHandler handler) {

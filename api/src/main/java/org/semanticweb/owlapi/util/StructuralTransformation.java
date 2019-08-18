@@ -84,6 +84,7 @@ import org.semanticweb.owlapi.model.OWLIndividual;
 import org.semanticweb.owlapi.model.OWLInverseFunctionalObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLInverseObjectPropertiesAxiom;
 import org.semanticweb.owlapi.model.OWLIrreflexiveObjectPropertyAxiom;
+import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.model.OWLNegativeDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLNegativeObjectPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLObjectAllValuesFrom;
@@ -647,5 +648,12 @@ public class StructuralTransformation {
         public Set<OWLAxiom> visit(OWLDatatypeDefinitionAxiom axiom) {
             return toSet(axiom);
         }
+
+
+		@Override
+		public Set<OWLAxiom> visit(OWLMetamodellingAxiom axiom) {
+			// TODO Auto-generated method stub
+			return null;
+		}
     }
 }

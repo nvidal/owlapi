@@ -73,6 +73,7 @@ import org.semanticweb.owlapi.model.OWLIndividual;
 import org.semanticweb.owlapi.model.OWLInverseFunctionalObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLInverseObjectPropertiesAxiom;
 import org.semanticweb.owlapi.model.OWLIrreflexiveObjectPropertyAxiom;
+import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.model.OWLNegativeDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLNegativeObjectPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLObjectPropertyAssertionAxiom;
@@ -189,6 +190,12 @@ public abstract class AbstractInternalsImpl implements Internals, Serializable {
     protected final MapPointer<OWLAnnotationSubject, OWLAnnotationAssertionAxiom> annotationAssertionAxiomsBySubject = buildLazy(
             ANNOTATION_ASSERTION, annotsupernamed);
 
+    protected final MapPointer<OWLIndividual, OWLMetamodellingAxiom> metamodellingAxiomsByIndividual = buildLazy(
+            METAMODELLING, individualmetamodel);
+    protected final MapPointer<OWLClassExpression, OWLMetamodellingAxiom> metamodellingAxiomsByClass = buildLazy(
+            METAMODELLING, classmodel);
+ 
+    
     protected <K, V> Map<K, V> createMap() {
         return CollectionFactory.createMap();
     }
@@ -376,5 +383,15 @@ public abstract class AbstractInternalsImpl implements Internals, Serializable {
     @Override
     public MapPointer<OWLAnnotationSubject, OWLAnnotationAssertionAxiom> getAnnotationAssertionAxiomsBySubject() {
         return annotationAssertionAxiomsBySubject;
+    }
+    
+    
+    @Override
+    public MapPointer<OWLIndividual, OWLMetamodellingAxiom> getMetamodellingAxiomsByIndividual() {
+        return metamodellingAxiomsByIndividual;
+    }
+    @Override
+    public MapPointer<OWLClassExpression, OWLMetamodellingAxiom> getMetamodellingAxiomsByClass() {
+        return metamodellingAxiomsByClass;
     }
 }

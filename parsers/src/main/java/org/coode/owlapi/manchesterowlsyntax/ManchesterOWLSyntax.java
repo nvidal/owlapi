@@ -180,7 +180,9 @@ public enum ManchesterOWLSyntax {
 
     HAS_KEY("HasKey", false, true, false, false, false),
 
-    RULE("Rule", true, true, false, false, false);
+    RULE("Rule", true, true, false, false, false),
+    
+    METAMODELLING("MetaModeling", false, true, true, false, false);
 
     private boolean frameKeyword;
 

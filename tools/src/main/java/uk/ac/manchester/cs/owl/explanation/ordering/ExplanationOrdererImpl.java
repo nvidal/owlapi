@@ -85,6 +85,7 @@ import org.semanticweb.owlapi.model.OWLIndividual;
 import org.semanticweb.owlapi.model.OWLInverseFunctionalObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLInverseObjectPropertiesAxiom;
 import org.semanticweb.owlapi.model.OWLIrreflexiveObjectPropertyAxiom;
+import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.model.OWLNegativeDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLNegativeObjectPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLObject;
@@ -553,6 +554,13 @@ public class ExplanationOrdererImpl implements ExplanationOrderer {
 
         @Override
         public void visit(OWLDatatypeDefinitionAxiom axiom) {}
+
+        
+		@Override
+		public void visit(OWLMetamodellingAxiom axiom) {
+			// TODO Auto-generated method stub
+
+		}
     }
 
     // ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -815,5 +823,15 @@ public class ExplanationOrdererImpl implements ExplanationOrderer {
 
         @Override
         public void visit(OWLSubAnnotationPropertyOfAxiom axiom) {}
+
+
+		@Override
+		public void visit(OWLMetamodellingAxiom axiom) {
+			// TODO Auto-generated method stub
+			if (!axiom.getModelClass().isAnonymous()) {
+                getAxiomsForLHS(axiom.getModelClass().asOWLClass()).add(axiom);
+                indexAxiomsByRHSEntities(axiom.getMetamodelIndividual(), axiom);
+            }
+		}
     }
 }

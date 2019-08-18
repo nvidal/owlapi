@@ -74,6 +74,7 @@ import org.semanticweb.owlapi.model.OWLIndividual;
 import org.semanticweb.owlapi.model.OWLInverseFunctionalObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLInverseObjectPropertiesAxiom;
 import org.semanticweb.owlapi.model.OWLIrreflexiveObjectPropertyAxiom;
+import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.model.OWLNegativeDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLNegativeObjectPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLObject;
@@ -235,6 +236,17 @@ public class InitVisitorFactory {
             }
             return (K) axiom.getClassExpression().asOWLClass();
         }
+
+    
+		@Override
+		public K visit(OWLMetamodellingAxiom axiom) {
+			if ( sub ){
+			    return (K) axiom.getModelClass();
+			}
+			else{
+				return (K) axiom.getMetamodelIndividual();
+			}
+		}
     }
 
     @SuppressWarnings("unchecked")
@@ -332,6 +344,13 @@ public class InitVisitorFactory {
         public Collection<K> visit(OWLInverseObjectPropertiesAxiom axiom) {
             return (Collection<K>) axiom.getProperties();
         }
+
+
+		@Override
+		public Collection<K> visit(OWLMetamodellingAxiom owlMetamodellingAxiom) {
+			// TODO Auto-generated method stub
+			return null;
+		}
     }
 
 
@@ -561,4 +580,10 @@ public class InitVisitorFactory {
             true, true);
     static final InitVisitor<OWLAnnotationSubject> annotsupernamed = new InitVisitor<OWLAnnotationSubject>(
             true, true);
+    
+    static final InitVisitor<OWLIndividual> individualmetamodel = new InitIndividualVisitor<OWLIndividual>(
+            false, true);
+    static final InitVisitor<OWLClassExpression> classmodel = new InitVisitor<OWLClassExpression>(true,
+            true);
+ 
 }

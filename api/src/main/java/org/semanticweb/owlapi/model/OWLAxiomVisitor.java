@@ -154,6 +154,9 @@ public interface OWLAxiomVisitor extends OWLAnnotationAxiomVisitor {
 
     void visit(SWRLRule rule);
 
+    // visit for Metamodelling axioms
+	void visit(OWLMetamodellingAxiom owlMetamodellingAxiom);
+
 
 
 

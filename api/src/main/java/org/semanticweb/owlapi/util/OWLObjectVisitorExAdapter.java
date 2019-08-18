@@ -83,6 +83,7 @@ import org.semanticweb.owlapi.model.OWLInverseFunctionalObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLInverseObjectPropertiesAxiom;
 import org.semanticweb.owlapi.model.OWLIrreflexiveObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLLiteral;
+import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLNegativeDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLNegativeObjectPropertyAssertionAxiom;
@@ -579,4 +580,10 @@ public class OWLObjectVisitorExAdapter<O> implements OWLObjectVisitorEx<O> {
     public O visit(OWLDatatypeDefinitionAxiom axiom) {
         return getDefaultReturnValue(axiom);
     }
+
+    
+	@Override
+	public O visit(OWLMetamodellingAxiom axiom) {
+		return getDefaultReturnValue(axiom);
+	}
 }

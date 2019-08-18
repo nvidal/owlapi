@@ -157,4 +157,7 @@ public interface OWLAxiomVisitorEx<O> extends OWLAnnotationAxiomVisitorEx<O> {
 
 
     O visit(SWRLRule rule);
+
+
+	O visit(OWLMetamodellingAxiom owlMetamodellingAxiom);
 }

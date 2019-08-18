@@ -68,6 +68,7 @@ import org.semanticweb.owlapi.model.OWLHasKeyAxiom;
 import org.semanticweb.owlapi.model.OWLInverseFunctionalObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLInverseObjectPropertiesAxiom;
 import org.semanticweb.owlapi.model.OWLIrreflexiveObjectPropertyAxiom;
+import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.model.OWLNegativeDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLNegativeObjectPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLObjectPropertyAssertionAxiom;
@@ -331,5 +332,10 @@ public class AxiomTypeProvider implements OWLAxiomVisitor {
     @Override
     public void visit(OWLDatatypeDefinitionAxiom axiom) {
         axiomType = DATATYPE_DEFINITION;
+    }
+    
+    @Override
+    public void visit(OWLMetamodellingAxiom axiom) {
+        axiomType = METAMODELLING;
     }
 }

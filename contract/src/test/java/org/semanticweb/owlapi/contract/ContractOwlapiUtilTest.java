@@ -49,6 +49,7 @@ import org.semanticweb.owlapi.model.OWLInverseFunctionalObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLInverseObjectPropertiesAxiom;
 import org.semanticweb.owlapi.model.OWLIrreflexiveObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLLiteral;
+import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLNegativeDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLNegativeObjectPropertyAssertionAxiom;
@@ -645,6 +646,13 @@ public class ContractOwlapiUtilTest {
 
             @Override
             protected void process(OWLAxiom axiom, AxiomType<?> type) {}
+
+            
+			@Override
+			public void visit(OWLMetamodellingAxiom owlMetamodellingAxiom) {
+				// TODO Auto-generated method stub
+				
+			}
         };
         String result0 = testSubject0.toString();
     }

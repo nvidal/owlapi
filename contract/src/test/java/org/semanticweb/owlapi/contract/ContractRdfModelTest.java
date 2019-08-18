@@ -17,6 +17,7 @@ import org.coode.owlapi.rdf.model.RDFTriple;
 import org.junit.Test;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLLiteral;
+import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 
 @SuppressWarnings({ "unused", "javadoc" })
 public class ContractRdfModelTest {
@@ -47,6 +48,13 @@ public class ContractRdfModelTest {
 
             @Override
             protected void addTriple(Object subject, Object pred, Object object) {}
+
+           
+			@Override
+			public void visit(OWLMetamodellingAxiom owlMetamodellingAxiom) {
+				// TODO Auto-generated method stub
+				
+			}
         };
         String result0 = testSubject0.toString();
     }

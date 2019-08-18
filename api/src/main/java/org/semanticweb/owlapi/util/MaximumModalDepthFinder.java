@@ -85,6 +85,7 @@ import org.semanticweb.owlapi.model.OWLInverseFunctionalObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLInverseObjectPropertiesAxiom;
 import org.semanticweb.owlapi.model.OWLIrreflexiveObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLLiteral;
+import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLNegativeDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLNegativeObjectPropertyAssertionAxiom;
@@ -598,4 +599,12 @@ public class MaximumModalDepthFinder implements OWLObjectVisitorEx<Integer> {
     public Integer visit(SWRLDataPropertyAtom node) {
         return _0;
     }
+
+ 
+	@Override
+	public Integer visit(OWLMetamodellingAxiom axiom) {
+        int modelClassModalDepth = axiom.getModelClass().accept(this).intValue();
+        int metamodelModalDepth = axiom.getMetamodelIndividual().accept(this).intValue();
+        return Integer.valueOf(Math.max(modelClassModalDepth, metamodelModalDepth));
+	}
 }

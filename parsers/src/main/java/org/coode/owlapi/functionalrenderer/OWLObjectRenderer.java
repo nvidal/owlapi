@@ -1139,4 +1139,15 @@ public class OWLObjectRenderer implements OWLObjectVisitor {
         node.getSecondArgument().accept(this);
         writeCloseBracket();
     }
+
+
+	@Override
+	public void visit(OWLMetamodellingAxiom axiom) {
+		writeAxiomStart(METAMODELLING, axiom);
+        axiom.getMetamodelIndividual().accept(this);
+        writeSpace();
+        axiom.getModelClass().accept(this);
+        writeAxiomEnd();
+		
+	}
 }

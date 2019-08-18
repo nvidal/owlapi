@@ -995,6 +995,13 @@ public class Utils {
             public OWLObject visit(SWRLRule rule) {
                 return null;
             }
+
+           
+			@Override
+			public OWLObject visit(OWLMetamodellingAxiom owlMetamodellingAxiom) {
+				// TODO Auto-generated method stub
+				return null;
+			}
         };
     }
 

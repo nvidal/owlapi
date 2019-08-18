@@ -73,6 +73,7 @@ import org.semanticweb.owlapi.model.OWLIndividual;
 import org.semanticweb.owlapi.model.OWLInverseFunctionalObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLInverseObjectPropertiesAxiom;
 import org.semanticweb.owlapi.model.OWLIrreflexiveObjectPropertyAxiom;
+import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.model.OWLNegativeDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLNegativeObjectPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLObjectComplementOf;
@@ -413,6 +414,15 @@ public class SatisfiabilityConverter {
             throw new OWLRuntimeException(
                     "Not implemented: Cannot generate explanation for " + axiom);
         }
+
+
+		@Override
+		public void visit(OWLMetamodellingAxiom axiom) {
+
+			throw new OWLRuntimeException(
+                    "[Metamodelling] Not implemented: Cannot generate explanation for " + axiom);
+			
+		}
     }
 
     protected static final Logger logger = Logger.getLogger(SatisfiabilityConverter.class

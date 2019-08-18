@@ -73,6 +73,7 @@ import org.semanticweb.owlapi.model.OWLIndividual;
 import org.semanticweb.owlapi.model.OWLInverseFunctionalObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLInverseObjectPropertiesAxiom;
 import org.semanticweb.owlapi.model.OWLIrreflexiveObjectPropertyAxiom;
+import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.model.OWLNegativeDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLNegativeObjectPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLObjectIntersectionOf;
@@ -294,4 +295,10 @@ public class DebuggerClassExpressionGenerator implements OWLAxiomVisitor {
 
     @Override
     public void visit(OWLDatatypeDefinitionAxiom axiom) {}
+
+  
+	@Override
+	public void visit(OWLMetamodellingAxiom axiom) {
+		// TODO Auto-generated method stub
+	}
 }

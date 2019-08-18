@@ -89,6 +89,7 @@ import org.semanticweb.owlapi.model.OWLInverseFunctionalObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLInverseObjectPropertiesAxiom;
 import org.semanticweb.owlapi.model.OWLIrreflexiveObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLLiteral;
+import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLNegativeDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLNegativeObjectPropertyAssertionAxiom;
@@ -665,4 +666,13 @@ public class OWLClassExpressionCollector implements OWLObjectVisitorEx<Set<OWLCl
     public Set<OWLClassExpression> visit(SWRLDataPropertyAtom node) {
         return Collections.emptySet();
     }
+
+	@Override
+	public Set<OWLClassExpression> visit(
+			OWLMetamodellingAxiom axiom) {
+		Set<OWLClassExpression> result = new HashSet<OWLClassExpression>();
+        result.addAll(axiom.getModelClass().accept(this));
+        result.addAll(axiom.getMetamodelIndividual().accept(this));
+        return result;
+	}
 }

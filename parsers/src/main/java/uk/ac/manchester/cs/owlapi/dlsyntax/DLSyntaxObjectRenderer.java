@@ -927,4 +927,14 @@ public class DLSyntaxObjectRenderer implements OWLObjectRenderer, OWLObjectVisit
         node.getSecondArgument().accept(this);
         write(")");
     }
+
+
+	@Override
+	public void visit(OWLMetamodellingAxiom axiom) {
+		axiom.getMetamodelIndividual().accept(this);
+        writeSpace();
+        write(METAMODELLING);
+        writeSpace();
+        axiom.getModelClass().accept(this);
+	}
 }

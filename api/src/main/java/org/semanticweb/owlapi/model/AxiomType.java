@@ -335,6 +335,12 @@ public class AxiomType<C extends OWLAxiom> implements Serializable {
 
     public static final AxiomType<OWLDatatypeDefinitionAxiom> DATATYPE_DEFINITION = getInstance(
             38, "DatatypeDefinition", true, true, true);
+    
+    /**
+     * Axiom Type for Metamodelling
+     */
+    public static final AxiomType<OWLMetamodellingAxiom> METAMODELLING = getInstance(39,
+            "Metamodelling", false, false, true);
 
     static {
 
@@ -377,6 +383,8 @@ public class AxiomType<C extends OWLAxiom> implements Serializable {
         AXIOM_TYPES.add(ANNOTATION_PROPERTY_DOMAIN);
         AXIOM_TYPES.add(ANNOTATION_PROPERTY_RANGE);
         AXIOM_TYPES.add(HAS_KEY);
+        
+        AXIOM_TYPES.add(METAMODELLING);
 
 
         for(AxiomType<?> type : AXIOM_TYPES) {
@@ -408,4 +416,11 @@ public class AxiomType<C extends OWLAxiom> implements Serializable {
                     SUB_DATA_PROPERTY, EQUIVALENT_DATA_PROPERTIES,
                     DISJOINT_OBJECT_PROPERTIES, SUB_OBJECT_PROPERTY,
                     EQUIVALENT_OBJECT_PROPERTIES, SUB_PROPERTY_CHAIN_OF));
+    
+    /**
+     * MBox - conteins metamodelling axioms
+     */
+    @SuppressWarnings("unchecked")
+    public static final Set<AxiomType<?>> MBoxAxiomTypes = new HashSet<AxiomType<?>>(
+            Arrays.asList(METAMODELLING));
 }

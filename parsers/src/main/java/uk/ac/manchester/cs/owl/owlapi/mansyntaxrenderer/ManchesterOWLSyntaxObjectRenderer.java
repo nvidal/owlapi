@@ -1132,4 +1132,14 @@ public class ManchesterOWLSyntaxObjectRenderer extends AbstractRenderer implemen
     public void visit(OWLOntology ontology) {
 
     }
+
+	@Override
+	public void visit(OWLMetamodellingAxiom axiom) {
+		setAxiomWriting();
+        axiom.getMetamodelIndividual().accept(this);
+        write(METAMODELLING);
+        axiom.getModelClass().accept(this);
+        restore();
+		
+	}
 }

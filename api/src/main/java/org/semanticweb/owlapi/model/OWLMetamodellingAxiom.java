@@ -22,7 +22,7 @@
  * Alternatively, the contents of this file may be used under the terms of the Apache License, Version 2.0
  * in which case, the provisions of the Apache License Version 2.0 are applicable instead of those above.
  *
- * Copyright 2011, The University of Manchester
+ * Copyright 2011, University of Manchester
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,73 +37,34 @@
  * limitations under the License.
  */
 
-package uk.ac.manchester.cs.owlapi.dlsyntax;
+package org.semanticweb.owlapi.model;
 /**
- * Author: Matthew Horridge<br>
- * The University Of Manchester<br>
- * Bio-Health Informatics Group<br>
- * Date: 10-Feb-2008<br><br>
+ * Author: Ignacio Vidal<br>
+ * FIng - UdelaR<br>
+ * Date: 25-Oct-2014
+ * <p/>
+ * Represents an Metamodelling axiom.
  */
-@SuppressWarnings("javadoc")
-public enum DLSyntax {
+public interface OWLMetamodellingAxiom extends OWLClassAxiom {
 
-    SUBCLASS("\u2291"),
+    /**
+     * Gets the ModelClass in this axiom
+     * @return The class expression that represents the Model in this axiom.
+     */
+    OWLClassExpression getModelClass();
 
-    EQUIVALENT_TO("\u2261"),
-
-    NOT("\u00AC"),
-
-    DISJOINT_WITH(SUBCLASS + " " + NOT),
-
-    EXISTS("\u2203"),
-
-    FORALL("\u2200"),
-
-    IN("\u2208"),
-
-    MIN("\u2265"),
-
-    EQUAL("="),
-
-    NOT_EQUAL("\u2260"),
-
-    MAX("\u2264"),
-
-    INVERSE("\u207B"),  // Superscript minus
-
-    AND("\u2293"),
-
-    TOP("\u22A4"),
-
-    BOTTOM("\u22A5"),
-
-    OR("\u2294"),
-
-    COMP("\u2218"),
-
-    WEDGE("\u22C0"),
-
-    IMPLIES("\u2190"),
-
-    COMMA(","),
-
-    SELF("self"),
-    
-    METAMODELLING("metaModeling");
+    /**
+     * Gets the Metamodel in this axiom.
+     * @return The individual that represents the Metamodel in this axiom.
+     */
+    OWLIndividual getMetamodelIndividual();
 
 
-
-
-    private String unicodeSymbol;
-
-
-    DLSyntax(String unicode) {
-        this.unicodeSymbol = unicode;
-    }
-
+    /**
+     * @return <code>true</code> if this axiom is a GCI, other wise <code>false</code>.
+     */
+    boolean isGCI();
 
     @Override
-	public String toString() {
-        return unicodeSymbol;
-    }
+    OWLMetamodellingAxiom getAxiomWithoutAnnotations();
 }

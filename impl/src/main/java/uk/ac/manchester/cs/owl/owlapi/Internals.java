@@ -77,6 +77,7 @@ import org.semanticweb.owlapi.model.OWLInverseFunctionalObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLInverseObjectPropertiesAxiom;
 import org.semanticweb.owlapi.model.OWLIrreflexiveObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLLogicalAxiom;
+import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLNegativeDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLNegativeObjectPropertyAssertionAxiom;
@@ -287,4 +288,9 @@ public interface Internals {
     <K, V extends OWLAxiom> boolean remove(Pointer<K, V> pointer, K k, V v);
 
     void removePropertyChainSubPropertyAxioms(OWLSubPropertyChainOfAxiom ax);
+
+ 
+	MapPointer<OWLIndividual, OWLMetamodellingAxiom> getMetamodellingAxiomsByIndividual();
+	MapPointer<OWLClassExpression, OWLMetamodellingAxiom> getMetamodellingAxiomsByClass();
+	
 }

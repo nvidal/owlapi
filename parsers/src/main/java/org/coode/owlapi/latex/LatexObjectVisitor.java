@@ -1004,4 +1004,18 @@ public class LatexObjectVisitor implements OWLObjectVisitor {
     public void visit(IRI iri) {
 		write(iri.getFragment());
 	}
+
+    public static final String METAMODELLING = "\\ensuremath{\\sqsubseteq}";
+	@Override
+	public void visit(OWLMetamodellingAxiom axiom) {
+		setPrettyPrint(false);
+		axiom.getMetamodelIndividual().accept(this);
+		writeSpace();
+		write(METAMODELLING);
+		writeSpace();
+		axiom.getModelClass().accept(this);
+		writeSpace();
+		setPrettyPrint(true);
+		
+	}
 }

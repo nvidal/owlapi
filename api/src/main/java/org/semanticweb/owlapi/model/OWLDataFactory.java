@@ -2536,4 +2536,13 @@ public interface OWLDataFactory extends SWRLDataFactory {
 	 * Empty all caches
 	 */
 	void purge();
+
+	
+	// AGREGADO //
+	OWLMetamodellingAxiom getOWLMetamodellingAxiom(OWLClassExpression modelClass,
+			OWLIndividual metamodelIndividual);
+	
+	OWLMetamodellingAxiom getOWLMetamodellingAxiom(OWLClassExpression modelClass,
+			OWLIndividual metamodelIndividual,  Set<? extends OWLAnnotation> annotations);
+
 }

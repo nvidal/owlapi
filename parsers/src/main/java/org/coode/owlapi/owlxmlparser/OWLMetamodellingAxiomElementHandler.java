@@ -22,7 +22,7 @@
  * Alternatively, the contents of this file may be used under the terms of the Apache License, Version 2.0
  * in which case, the provisions of the Apache License Version 2.0 are applicable instead of those above.
  *
- * Copyright 2011, The University of Manchester
+ * Copyright 2011, University of Manchester
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,73 +37,52 @@
  * limitations under the License.
  */
 
-package uk.ac.manchester.cs.owlapi.dlsyntax;
+package org.coode.owlapi.owlxmlparser;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.semanticweb.owlapi.model.OWLAxiom;
+import org.semanticweb.owlapi.model.OWLClassExpression;
+import org.semanticweb.owlapi.model.OWLIndividual;
+
+
 /**
- * Author: Matthew Horridge<br>
- * The University Of Manchester<br>
- * Bio-Health Informatics Group<br>
- * Date: 10-Feb-2008<br><br>
+ * Author: Ignacio Vidal<br>
+ * FIng - UdelaR<br>
+ * Date: 12-Nov-2014<br><br>
  */
 @SuppressWarnings("javadoc")
-public enum DLSyntax {
+public class OWLMetamodellingAxiomElementHandler extends AbstractOWLAxiomElementHandler {
 
-    SUBCLASS("\u2291"),
+	private static final Logger logger = Logger.getLogger(OWLMetamodellingAxiomElementHandler.class.getName());
+			
+    private OWLClassExpression modelClass;
+    private OWLIndividual metaIndividual;
 
-    EQUIVALENT_TO("\u2261"),
-
-    NOT("\u00AC"),
-
-    DISJOINT_WITH(SUBCLASS + " " + NOT),
-
-    EXISTS("\u2203"),
-
-    FORALL("\u2200"),
-
-    IN("\u2208"),
-
-    MIN("\u2265"),
-
-    EQUAL("="),
-
-    NOT_EQUAL("\u2260"),
-
-    MAX("\u2264"),
-
-    INVERSE("\u207B"),  // Superscript minus
-
-    AND("\u2293"),
-
-    TOP("\u22A4"),
-
-    BOTTOM("\u22A5"),
-
-    OR("\u2294"),
-
-    COMP("\u2218"),
-
-    WEDGE("\u22C0"),
-
-    IMPLIES("\u2190"),
-
-    COMMA(","),
-
-    SELF("self"),
-    
-    METAMODELLING("metaModeling");
-
-
-
-
-    private String unicodeSymbol;
-
-
-    DLSyntax(String unicode) {
-        this.unicodeSymbol = unicode;
+    public OWLMetamodellingAxiomElementHandler(OWLXMLParserHandler handler) {
+        super(handler);
     }
 
+    @Override
+	public void startElement(String name) throws OWLXMLParserException {
+        super.startElement(name);
+        modelClass = null;
+        metaIndividual = null;
+    }
 
     @Override
-	public String toString() {
-        return unicodeSymbol;
+   	public void handleChild(AbstractClassExpressionElementHandler handler) {
+           modelClass = handler.getOWLObject();
+    }
+    
+    @Override
+    public void handleChild(OWLIndividualElementHandler handler) throws OWLXMLParserException {
+    	metaIndividual = handler.getOWLObject();
+    }
+
+    @Override
+	protected OWLAxiom createAxiom() throws OWLXMLParserException {
+        return getOWLDataFactory().getOWLMetamodellingAxiom(modelClass, metaIndividual, getAnnotations());
     }
 }

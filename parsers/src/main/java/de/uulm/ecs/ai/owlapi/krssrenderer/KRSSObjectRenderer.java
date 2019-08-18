@@ -99,6 +99,7 @@ import org.semanticweb.owlapi.model.OWLInverseFunctionalObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLInverseObjectPropertiesAxiom;
 import org.semanticweb.owlapi.model.OWLIrreflexiveObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLLiteral;
+import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLNegativeDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLNegativeObjectPropertyAssertionAxiom;
@@ -1083,5 +1084,12 @@ public class KRSSObjectRenderer implements OWLObjectVisitor {
     @Override
     public void visit(OWLAnnotation node) {
     }
+
+  
+	@Override
+	public void visit(OWLMetamodellingAxiom axiom) {
+		// TODO Auto-generated method stub
+		
+	}
 }
 

@@ -94,6 +94,7 @@ import org.semanticweb.owlapi.model.OWLInverseFunctionalObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLInverseObjectPropertiesAxiom;
 import org.semanticweb.owlapi.model.OWLIrreflexiveObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLLiteral;
+import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLNegativeDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLNegativeObjectPropertyAssertionAxiom;
@@ -1066,5 +1067,17 @@ public class OWLObjectWalker<O extends OWLObject> {
             axiom.getDatatype().accept(this);
             axiom.getDataRange().accept(this);
         }
+
+
+		@Override
+		public void visit(OWLMetamodellingAxiom axiom) {
+			process(axiom);
+            OWLObjectWalker.this.ax = axiom;
+            // -ve polarity
+            axiom.getModelClass().accept(this);
+            // +ve polarity
+            axiom.getMetamodelIndividual().accept(this);
+			
+		}
     }
 }

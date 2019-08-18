@@ -1642,4 +1642,21 @@ public class OWLDataFactoryImpl implements OWLDataFactory, Serializable {
 
         return data.getRDFPlainLiteral();
     }
+
+	@Override
+	public OWLMetamodellingAxiom getOWLMetamodellingAxiom(
+			OWLClassExpression modelClass, OWLIndividual metamodelIndividual) {
+		return getOWLMetamodellingAxiom(modelClass, metamodelIndividual, EMPTY_ANNOTATIONS_SET);
+	}
+
+	@Override
+	public OWLMetamodellingAxiom getOWLMetamodellingAxiom(
+			OWLClassExpression modelClass, OWLIndividual metamodelIndividual,
+			Set<? extends OWLAnnotation> annotations) {
+		checkNull(modelClass, "modelclass");
+		checkNull(metamodelIndividual, "metamodelIndividual");
+		checkNull(annotations, ANNOTATIONS, true);
+		return new OWLMetamodellingAxiomImpl(modelClass, metamodelIndividual, annotations);
+	}
 }
+

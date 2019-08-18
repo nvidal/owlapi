@@ -256,7 +256,9 @@ public enum OWLXMLVocabulary {
 
     VARIABLE("Variable"),
 
-    DESCRIPTION_GRAPH_RULE("DescriptionGraphRule")
+    DESCRIPTION_GRAPH_RULE("DescriptionGraphRule"),
+    
+    METAMODELLING("MetaModelling")
     ;
 
     private final IRI iri;

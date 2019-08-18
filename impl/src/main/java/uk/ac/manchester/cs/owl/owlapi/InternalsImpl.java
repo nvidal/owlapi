@@ -86,6 +86,7 @@ import org.semanticweb.owlapi.model.OWLInverseFunctionalObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLInverseObjectPropertiesAxiom;
 import org.semanticweb.owlapi.model.OWLIrreflexiveObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLLogicalAxiom;
+import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLNegativeDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLNegativeObjectPropertyAssertionAxiom;
@@ -231,6 +232,7 @@ public class InternalsImpl extends AbstractInternalsImpl {
                 public void visit(OWLAnonymousIndividual individual) {
                     add(getOwlAnonymousIndividualReferences(), individual, axiom);
                 }
+
             });
             return true;
         }
@@ -276,6 +278,7 @@ public class InternalsImpl extends AbstractInternalsImpl {
                 public void visit(OWLAnonymousIndividual individual) {
                     remove(getOwlAnonymousIndividualReferences(), individual, axiom);
                 }
+
             };
             axiom.accept(referenceRemover);
             return true;
@@ -724,6 +727,13 @@ public class InternalsImpl extends AbstractInternalsImpl {
 
         @Override
         public void visit(OWLDatatypeDefinitionAxiom axiom) {}
+
+
+		@Override
+		public void visit(OWLMetamodellingAxiom axiom) {
+			add(getMetamodellingAxiomsByClass(), axiom.getModelClass(), axiom);
+			add(getMetamodellingAxiomsByIndividual(), axiom.getMetamodelIndividual(), axiom);
+		}
     }
 
     class RemoveAxiomVisitor implements OWLAxiomVisitor, Serializable {
@@ -979,5 +989,13 @@ public class InternalsImpl extends AbstractInternalsImpl {
             // many datatype definitions). This could always be optimised at a
             // later stage.
         }
+
+
+		@Override
+		public void visit(OWLMetamodellingAxiom axiom) {
+			remove(getMetamodellingAxiomsByClass(), axiom.getModelClass(), axiom);
+			remove(getMetamodellingAxiomsByIndividual(), axiom.getMetamodelIndividual(), axiom);
+		}
     }
+
 }

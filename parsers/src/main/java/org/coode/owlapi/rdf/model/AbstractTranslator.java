@@ -1163,5 +1163,11 @@ public abstract class AbstractTranslator<NODE, RESOURCE extends NODE, PREDICATE 
             return OWL_ANNOTATION_PROPERTY.getIRI();
         }
     }
+    
+    
+    @Override
+	public void visit(OWLMetamodellingAxiom axiom) {
+    	addSingleTripleAxiom(axiom, axiom.getMetamodelIndividual(), RDFS_METAMODELLING.getIRI(), axiom.getModelClass());
+	}
 
 }

@@ -73,6 +73,7 @@ import org.semanticweb.owlapi.model.OWLHasKeyAxiom;
 import org.semanticweb.owlapi.model.OWLInverseFunctionalObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLInverseObjectPropertiesAxiom;
 import org.semanticweb.owlapi.model.OWLIrreflexiveObjectPropertyAxiom;
+import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.model.OWLNegativeDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLNegativeObjectPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLObjectAllValuesFrom;
@@ -529,5 +530,11 @@ public class HornAxiomVisitorEx implements OWLAxiomVisitorEx<Boolean> {
         public Boolean visit(OWLDataMaxCardinality ce) {
 			return Boolean.FALSE;
 		}
+	}
+
+
+	@Override
+	public Boolean visit(OWLMetamodellingAxiom axiom) {
+		return Boolean.FALSE;
 	}
 }
