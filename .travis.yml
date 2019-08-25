@@ -1,4 +1,3 @@
-dist: trusty
 sudo: false
 
 before_cache:
@@ -11,8 +10,5 @@ cache:
 
 language: java
 jdk:
-  - oraclejdk8
-#addons:
-#  apt:
-#    packages:
-#      - oracle-java8-installer
+  - openjdk11
+  - openjdk12
