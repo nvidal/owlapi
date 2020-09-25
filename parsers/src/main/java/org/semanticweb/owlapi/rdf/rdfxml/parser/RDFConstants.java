@@ -70,5 +70,6 @@ public interface RDFConstants {
     /**RDFS_DOMAIN*/            @Nonnull  String RDFS_DOMAIN              = RDFSNS + "domain";
     /**RDFS_RANGE*/             @Nonnull  String RDFS_RANGE               = RDFSNS + "range";
     /**KAONNS*/                 @Nonnull  String KAONNS                   = "http://kaon.semanticweb.org/2001/11/kaon-lexical#";
+    /**RDFS_METAMODELLING*/     @Nonnull  String RDFS_METAMODELLING       = RDFSNS + "metamodelling";
     //@formatter:on
 }

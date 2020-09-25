@@ -33,6 +33,7 @@ import static org.semanticweb.owlapi.vocab.OWLRDFVocabulary.RDFS_SUB_PROPERTY_OF
 import static org.semanticweb.owlapi.vocab.OWLRDFVocabulary.RDF_FIRST;
 import static org.semanticweb.owlapi.vocab.OWLRDFVocabulary.RDF_REST;
 import static org.semanticweb.owlapi.vocab.OWLRDFVocabulary.RDF_TYPE;
+import static org.semanticweb.owlapi.vocab.OWLRDFVocabulary.RDFS_METAMODELLING;
 
 import java.io.Serializable;
 import java.util.Arrays;
@@ -106,7 +107,7 @@ public class RDFTriple implements Serializable, Comparable<RDFTriple> {
             RDFS_COMMENT, RDFS_IS_DEFINED_BY, RDF_FIRST, RDF_REST, OWL_EQUIVALENT_CLASS,
             OWL_EQUIVALENT_PROPERTY, RDFS_SUBCLASS_OF, RDFS_SUB_PROPERTY_OF, RDFS_DOMAIN,
             RDFS_RANGE, OWL_DISJOINT_WITH, OWL_ON_PROPERTY, OWL_DATA_RANGE, OWL_ON_CLASS,
-            OWL_ANNOTATED_SOURCE, OWL_ANNOTATED_PROPERTY, OWL_ANNOTATED_TARGET);
+            OWL_ANNOTATED_SOURCE, OWL_ANNOTATED_PROPERTY, OWL_ANNOTATED_TARGET, RDFS_METAMODELLING);
         ORDERED_URIS.forEach(iri -> predicates.put(iri.getIRI(), nextId.getAndIncrement()));
         Stream.of(OWLRDFVocabulary.values())
             .forEach(iri -> predicates.putIfAbsent(iri.getIRI(), nextId.getAndIncrement()));

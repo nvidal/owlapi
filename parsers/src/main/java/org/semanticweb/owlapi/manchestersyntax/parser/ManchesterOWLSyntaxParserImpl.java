@@ -60,6 +60,7 @@ import static org.semanticweb.owlapi.manchestersyntax.parser.ManchesterOWLSyntax
 import static org.semanticweb.owlapi.manchestersyntax.parser.ManchesterOWLSyntax.MAX;
 import static org.semanticweb.owlapi.manchestersyntax.parser.ManchesterOWLSyntax.MAX_EXCLUSIVE_FACET;
 import static org.semanticweb.owlapi.manchestersyntax.parser.ManchesterOWLSyntax.MAX_INCLUSIVE_FACET;
+import static org.semanticweb.owlapi.manchestersyntax.parser.ManchesterOWLSyntax.METAMODELLING;
 import static org.semanticweb.owlapi.manchestersyntax.parser.ManchesterOWLSyntax.MIN;
 import static org.semanticweb.owlapi.manchestersyntax.parser.ManchesterOWLSyntax.MIN_EXCLUSIVE_FACET;
 import static org.semanticweb.owlapi.manchestersyntax.parser.ManchesterOWLSyntax.MIN_INCLUSIVE_FACET;
@@ -407,6 +408,8 @@ public class ManchesterOWLSyntaxParserImpl implements ManchesterOWLSyntaxParser 
         initialiseSection(new IndividualDifferentFromItemParser(), individualFrameSections);
         // Extensions
         initialiseSection(new IndividualDifferentIndividualsItemParser(), individualFrameSections);
+        //Metamodelling
+        initialiseSection(new IndividualMetamodellingItemParser(), individualFrameSections);
     }
 
     @Override
@@ -3394,6 +3397,20 @@ public class ManchesterOWLSyntaxParserImpl implements ManchesterOWLSyntaxParser 
         @Override
         public ManchesterOWLSyntax getFrameSectionKeyword() {
             return TYPES;
+        }
+    }
+
+    class IndividualMetamodellingItemParser extends AnnotatedClassExpressionListItemParser<OWLIndividual> {
+
+        @Override
+        public OWLAxiom createAxiom(OWLIndividual s, OWLClassExpression o,
+                                    Set<OWLAnnotation> anns) {
+            return dataFactory.getOWLMetamodellingAxiom(o, s, anns);
+        }
+
+        @Override
+        public ManchesterOWLSyntax getFrameSectionKeyword() {
+            return METAMODELLING;
         }
     }
 

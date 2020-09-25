@@ -103,6 +103,7 @@ import org.semanticweb.owlapi.model.parameters.ChangeApplied;
 import org.semanticweb.owlapi.model.parameters.Imports;
 import org.semanticweb.owlapi.model.parameters.Navigation;
 import org.semanticweb.owlapi.util.OWLAxiomSearchFilter;
+import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 
 import uk.ac.manchester.cs.owl.owlapi.HasTrimToSize;
 
@@ -306,7 +307,14 @@ public class ConcurrentOWLOntologyImpl implements OWLMutableOntology, HasTrimToS
     public Set<OWLAxiom> getABoxAxioms(@Nonnull Imports imports) {
         return withReadLock(() -> delegate.getABoxAxioms(imports));
     }
+    
+    @Override
+    @Nonnull
+    public Set<OWLAxiom> getMBoxAxioms(@Nonnull Imports imports) {
+        return withReadLock(() -> delegate.getMBoxAxioms(imports));
+    }
 
+    
     @Override
     @Nonnull
     public Set<OWLAxiom> getRBoxAxioms(@Nonnull Imports imports) {
@@ -1373,6 +1381,18 @@ public class ConcurrentOWLOntologyImpl implements OWLMutableOntology, HasTrimToS
     public Set<OWLDatatypeDefinitionAxiom> getDatatypeDefinitions(
         @Nonnull OWLDatatype owlDatatype) {
         return withReadLock(() -> delegate.getDatatypeDefinitions(owlDatatype));
+    }
+
+    @Nonnull
+    @Override
+    public Set<OWLMetamodellingAxiom> getMetamodellingAxioms(@Nonnull OWLIndividual owlIndividual) {
+        return withReadLock(() -> delegate.getMetamodellingAxioms(owlIndividual));
+    }
+
+    @Nonnull
+    @Override
+    public Set<OWLMetamodellingAxiom> getMetamodellingAxioms(@Nonnull OWLClass owlClass) {
+        return withReadLock(() -> delegate.getMetamodellingAxioms(owlClass));
     }
 
     @Override

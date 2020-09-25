@@ -54,6 +54,7 @@ import static org.semanticweb.owlapi.manchestersyntax.parser.ManchesterOWLSyntax
 import static org.semanticweb.owlapi.manchestersyntax.parser.ManchesterOWLSyntax.SYMMETRIC;
 import static org.semanticweb.owlapi.manchestersyntax.parser.ManchesterOWLSyntax.TRANSITIVE;
 import static org.semanticweb.owlapi.manchestersyntax.parser.ManchesterOWLSyntax.TYPES;
+import static org.semanticweb.owlapi.manchestersyntax.parser.ManchesterOWLSyntax.METAMODELLING;
 import static org.semanticweb.owlapi.model.parameters.Imports.EXCLUDED;
 
 import java.io.Writer;
@@ -126,6 +127,7 @@ import org.semanticweb.owlapi.model.OWLSubObjectPropertyOfAxiom;
 import org.semanticweb.owlapi.model.OWLSubPropertyChainOfAxiom;
 import org.semanticweb.owlapi.model.SWRLAtom;
 import org.semanticweb.owlapi.model.SWRLRule;
+import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.util.CollectionFactory;
 import org.semanticweb.owlapi.util.OWLAxiomFilter;
 import org.semanticweb.owlapi.util.OWLObjectComparator;
@@ -697,6 +699,19 @@ public class ManchesterOWLSyntaxFrameRenderer extends ManchesterOWLSyntaxObjectR
                 }
             }
         }
+        if (!isFiltered(AxiomType.METAMODELLING)) {
+            for (OWLOntology ontology : ontologies) {
+                SectionMap<Object, OWLAxiom> individuals = new SectionMap<>();
+                for (OWLMetamodellingAxiom ax : sortedCollection(
+                        ontology.getMetamodellingAxioms(cls))) {
+                    if (isDisplayed(ax) && (renderExtensions || ax.getMetamodelIndividual().isAnonymous())) {
+                        individuals.put(ax.getMetamodelIndividual(), ax);
+                        axioms.add(ax);
+                    }
+                }
+                writeSection(METAMODELLING, individuals, ",", true, ontology);
+            }
+        }
         writeEntitySectionEnd(CLASS.toString());
         return axioms;
     }
@@ -1126,6 +1141,18 @@ public class ManchesterOWLSyntaxFrameRenderer extends ManchesterOWLSyntaxObjectR
                             ontology);
                     }
                 }
+            }
+        }
+        if (!isFiltered(AxiomType.METAMODELLING)) {
+            for (OWLOntology ontology : ontologies) {
+                Collection<OWLClassExpression> clss = sortedCollection();
+                for (OWLMetamodellingAxiom ax : ontology.getMetamodellingAxioms(individual)) {
+                    if (isDisplayed(ax)) {
+                        clss.add(ax.getModelClass());
+                        axioms.add(ax);
+                    }
+                }
+                writeSection(METAMODELLING, clss, ",", true, ontology);
             }
         }
         writeEntitySectionEnd(INDIVIDUAL.toString());

@@ -360,6 +360,8 @@ class CustomTokenizer implements TokenManager {
                 return makeToken(EDGEASSERTION, s);
             case "MainClasses":
                 return makeToken(MAINCLASSES, s);
+            case "Metamodelling":
+                return makeToken(METAMODELLING, s);
             default:
                 return makeToken(PN_LOCAL, s);
         }

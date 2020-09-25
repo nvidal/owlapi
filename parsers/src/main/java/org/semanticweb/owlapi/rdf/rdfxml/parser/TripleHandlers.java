@@ -86,6 +86,7 @@ import static org.semanticweb.owlapi.vocab.OWLRDFVocabulary.RDF_NIL;
 import static org.semanticweb.owlapi.vocab.OWLRDFVocabulary.RDF_PROPERTY;
 import static org.semanticweb.owlapi.vocab.OWLRDFVocabulary.RDF_REST;
 import static org.semanticweb.owlapi.vocab.OWLRDFVocabulary.RDF_TYPE;
+import static org.semanticweb.owlapi.vocab.OWLRDFVocabulary.RDFS_METAMODELLING;
 
 import java.util.HashSet;
 import java.util.List;
@@ -468,6 +469,7 @@ public class TripleHandlers {
             add(predicateHandlers, new TPOnDataRangeHandler(r));
             add(predicateHandlers, new TPComplementOfHandler(r));
             add(predicateHandlers, new TPDatatypeComplementOfHandler(r));
+            add(predicateHandlers, new TPMetamodellingHandler(r));
             return predicateHandlers;
         }
 
@@ -2127,6 +2129,54 @@ public class TripleHandlers {
             addAxiom(ax);
             consumeTriple(subject, predicate, object);
         }
+    }
+    
+    /**
+     * Handles rdfs:metamodelling triples. If handling is set to strict then the triple is only
+     * consumed if the object is typed as classes.
+     * 
+     * Individual is metamodel of Class
+     */
+    static class TPMetamodellingHandler extends AbstractTriplePredicateHandler {
+
+        TPMetamodellingHandler(OWLRDFConsumer consumer) {
+            super(consumer, RDFS_METAMODELLING.getIRI());
+        }
+
+        @Override
+        public boolean canHandle(IRI subject, @Nonnull IRI predicate, IRI object) {
+            return super.canHandle(subject, predicate, object) && consumer.isClassExpression(object);
+        }
+
+        @Override
+        public boolean canHandleStreaming(IRI subject, IRI predicate, IRI object) {
+            consumer.addOWLNamedIndividual(subject, false);
+            consumer.addClassExpression(object, false);
+            return !isStrict() && !isSubjectOrObjectAnonymous(subject, object);
+        }
+
+        @Override
+        public void handleTriple(IRI subject, IRI predicate, IRI object) {
+            if (isStrict()) {
+                if (isClassExpressionStrict(object)) {
+                    translate(subject, predicate, object);
+                }
+            } else {
+                if (isClassExpressionLax(object)) {
+                    translate(subject, predicate, object);
+                }
+            }
+        }
+
+        private void translate(@Nonnull IRI subject, @Nonnull IRI predicate, @Nonnull IRI object) {
+            OWLIndividual metamodelIndividual = translateIndividual(subject);
+            OWLClassExpression modelClass = translateClassExpression(object);
+            Set<OWLAnnotation> pendingAnnotations = consumer.getPendingAnnotations();
+            OWLAxiom ax = df.getOWLMetamodellingAxiom(modelClass, metamodelIndividual, pendingAnnotations);
+            addAxiom(ax);
+            consumeTriple(subject, predicate, object);
+        }
+
     }
 
     static class TPSubPropertyOfHandler extends AbstractTriplePredicateHandler {

@@ -652,4 +652,27 @@ public interface OWLAxiomIndex {
     @Nonnull
     Set<OWLDatatypeDefinitionAxiom> getDatatypeDefinitions(
             @Nonnull OWLDatatype datatype);
+
+    /**
+     * Gets all of the {@link OWLMetamodellingAxiom}s axioms where the left hand side (the metamodel)
+     * is equal to the specified {@code individual}.
+     *
+     * @param individual
+     *        The individual that is equal to the left hand side of the axiom
+     * @return the axioms matching the search. The set is a copy of the data.
+     */
+    @Nonnull
+    Set<OWLMetamodellingAxiom> getMetamodellingAxioms(@Nonnull OWLIndividual individual);
+
+    /**
+     * Gets the {@link OWLMetamodellingAxiom}s contained in this ontology that
+     * make the specified class expression, {@code ce}, a model for some
+     * individual.
+     *
+     * @param owlClass
+     *        The class expression that the returned axioms make a model for some
+     *        individual.
+     * @return the axioms matching the search. The set is a copy of the data.
+     */
+    Set<OWLMetamodellingAxiom> getMetamodellingAxioms(OWLClass owlClass);
 }

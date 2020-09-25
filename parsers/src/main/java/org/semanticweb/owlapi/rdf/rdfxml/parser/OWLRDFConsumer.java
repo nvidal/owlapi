@@ -59,6 +59,7 @@ import static org.semanticweb.owlapi.vocab.OWLRDFVocabulary.RDFS_RANGE;
 import static org.semanticweb.owlapi.vocab.OWLRDFVocabulary.RDFS_SUBCLASS_OF;
 import static org.semanticweb.owlapi.vocab.OWLRDFVocabulary.RDFS_SUB_PROPERTY_OF;
 import static org.semanticweb.owlapi.vocab.OWLRDFVocabulary.RDF_TYPE;
+import static org.semanticweb.owlapi.vocab.OWLRDFVocabulary.RDFS_METAMODELLING;
 import static org.semanticweb.owlapi.vocab.OWLRDFVocabulary.values;
 
 import java.util.ArrayList;
@@ -412,6 +413,7 @@ public class OWLRDFConsumer
         synonymMap.put(IRI.create(DAML_OIL, "label"), RDFS_LABEL.getIRI());
         synonymMap.put(IRI.create(DAML_OIL, "ObjectProperty"), OWL_OBJECT_PROPERTY.getIRI());
         synonymMap.put(IRI.create(DAML_OIL, "DatatypeProperty"), OWL_DATA_PROPERTY.getIRI());
+        synonymMap.put(IRI.create(DAML_OIL, "metamodelling"), RDFS_METAMODELLING.getIRI());
     }
 
     /**

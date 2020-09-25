@@ -255,6 +255,8 @@ public interface OWLFunctionalSyntaxParserConstants {
     int NODEID = 128;
     /** RegularExpression Id. */
     int ERROR = 129;
+    /** RegularExpression Id. */
+    int METAMODELLING = 130;
     /** Literal token values. */
     String[] tokenImage = { "<EOF>", "\" \"", "\"\\n\"", "\"\\t\"", "\"\\r\"",
             "\"#\"", "<token of kind 6>", "\"\\n\"", "\"\\\"\"",
@@ -304,5 +306,6 @@ public interface OWLFunctionalSyntaxParserConstants {
             "\"Nodes\"", "\"NodeAssertion\"", "\"Edges\"", "\"EdgeAssertion\"",
             "\"MainClasses\"", "\"=\"", "<INT>", "<FULLIRI>", "<PNAME_NS>",
             "<PN_LOCAL>", "<PNAME_LN>", "<PN_PREFIX>", "<PN_CHARS_BASE>",
-            "<PN_CHARS>", "<PN_CHARS_U>", "<NODEID>", "<ERROR>", };
+            "<PN_CHARS>", "<PN_CHARS_U>", "<NODEID>", "<ERROR>", 
+            "\"Metamodelling\"" };
 }

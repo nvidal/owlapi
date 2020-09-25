@@ -57,6 +57,7 @@ import org.semanticweb.owlapi.model.OWLSubDataPropertyOfAxiom;
 import org.semanticweb.owlapi.model.OWLSubObjectPropertyOfAxiom;
 import org.semanticweb.owlapi.model.OWLSymmetricObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLTransitiveObjectPropertyAxiom;
+import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.search.Filters;
 
 /**
@@ -402,5 +403,17 @@ public abstract class OWLAxiomIndexImpl extends
             OWLIndividual individual) {
         return getAxioms(OWLDifferentIndividualsAxiom.class,
                 OWLIndividual.class, individual, EXCLUDED, IN_SUB_POSITION);
+    }
+
+    @Override
+    public Set<OWLMetamodellingAxiom> getMetamodellingAxioms(OWLIndividual individual) {
+        return getAxioms(OWLMetamodellingAxiom.class,
+                OWLIndividual.class, individual, EXCLUDED, IN_SUB_POSITION);
+    }
+
+    @Override
+    public Set<OWLMetamodellingAxiom> getMetamodellingAxioms(OWLClass owlClass) {
+        return getAxioms(OWLMetamodellingAxiom.class,
+                OWLClass.class, owlClass, EXCLUDED, IN_SUB_POSITION);
     }
 }

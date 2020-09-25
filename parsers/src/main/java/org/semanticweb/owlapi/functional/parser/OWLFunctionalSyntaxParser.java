@@ -246,6 +246,7 @@ class OWLFunctionalSyntaxParser implements OWLFunctionalSyntaxParserConstants {
         label_3: while (true) {
             switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
                 case SUBCLASSOF:
+                case METAMODELLING:
                 case EQUIVALENTCLASSES:
                 case DISJOINTCLASSES:
                 case DISJOINTUNION:
@@ -1439,6 +1440,7 @@ class OWLFunctionalSyntaxParser implements OWLFunctionalSyntaxParserConstants {
         OWLAxiom ax = null;
         switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
             case SUBCLASSOF:
+            case METAMODELLING: 
             case EQUIVALENTCLASSES:
             case DISJOINTCLASSES:
             case DISJOINTUNION: {
@@ -1528,6 +1530,10 @@ class OWLFunctionalSyntaxParser implements OWLFunctionalSyntaxParserConstants {
                 ax = SubClassOf();
                 break;
             }
+            case METAMODELLING: {
+                ax = Metamodelling();
+                break;
+            }
             case EQUIVALENTCLASSES: {
                 ax = EquivalentClasses();
                 break;
@@ -1566,6 +1572,25 @@ class OWLFunctionalSyntaxParser implements OWLFunctionalSyntaxParserConstants {
         {
             if ("" != null) {
                 return dataFactory.getOWLSubClassOfAxiom(subClass, superClass,
+                        axiomAnnos);
+            }
+        }
+        throw new Error("Missing return statement in function");
+    }
+
+    final public OWLClassAxiom Metamodelling() throws ParseException {
+        OWLClassExpression model;
+        OWLIndividual metamodel;
+        Set<OWLAnnotation> axiomAnnos;
+        jj_consume_token(METAMODELLING);
+        jj_consume_token(OPENPAR);
+        axiomAnnos = AxiomAnnotationSet();
+        metamodel = Individual();
+        model = ClassExpression();
+        jj_consume_token(CLOSEPAR);
+        {
+            if ("" != null) {
+                return dataFactory.getOWLMetamodellingAxiom(model, metamodel,
                         axiomAnnos);
             }
         }

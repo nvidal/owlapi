@@ -76,6 +76,7 @@ import org.semanticweb.owlapi.model.OWLDocumentFormatImpl;
 import org.semanticweb.owlapi.model.OWLEntity;
 import org.semanticweb.owlapi.model.OWLEntityVisitor;
 import org.semanticweb.owlapi.model.OWLHasKeyAxiom;
+import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObject;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
@@ -555,6 +556,12 @@ public abstract class RDFRendererBase {
                             (OWLObjectPropertyAssertionAxiom) ax;
                         if (candidate.getProperty().isAnonymous()
                             && candidate.getObject().equals(individual)) {
+                            axioms.add(candidate);
+                        }
+                    } else if (ax instanceof OWLMetamodellingAxiom) {
+                        // check for Metamodelling axioms
+                        OWLMetamodellingAxiom candidate = (OWLMetamodellingAxiom) ax;
+                        if (candidate.getMetamodelIndividual().equals(individual)) {
                             axioms.add(candidate);
                         }
                     }

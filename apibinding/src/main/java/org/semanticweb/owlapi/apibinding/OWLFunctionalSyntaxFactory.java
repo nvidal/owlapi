@@ -75,6 +75,7 @@ import org.semanticweb.owlapi.model.OWLInverseFunctionalObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLInverseObjectPropertiesAxiom;
 import org.semanticweb.owlapi.model.OWLIrreflexiveObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLLiteral;
+import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLNegativeDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLNegativeObjectPropertyAssertionAxiom;
@@ -463,6 +464,13 @@ public final class OWLFunctionalSyntaxFactory {
             @Nonnull OWLClassExpression superClass,
             @Nonnull Set<OWLAnnotation> a) {
         return DF.getOWLSubClassOfAxiom(subClass, superClass, a);
+    }
+
+    @Nonnull
+    public static OWLMetamodellingAxiom Metamodelling(
+            @Nonnull OWLClassExpression model,
+            @Nonnull OWLIndividual metamodel) {
+        return DF.getOWLMetamodellingAxiom(model, metamodel);
     }
 
     @Nonnull
